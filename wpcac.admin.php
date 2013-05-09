@@ -62,7 +62,7 @@ function wpcac_api_key_added_admin_notice() {
 		return; ?>
 
 	<div id="wpcacp-message" class="updated">
-		<p><strong>WP Command and Control API Key successfully added</strong>, close this window to go back to <a href="https://wpcacemote.com/app/">WP Command and Control</a>.</p>
+		<p><strong>WP Command and Control API Key successfully added</strong>.</p>
 	</div>
 
 <?php }

@@ -108,14 +108,14 @@ function _wpcac_upgrade_plugin( $plugin ) {
 	// If the plugin was activited, we have to re-activate it
 	if ( $is_active ) {
 
-		// we can not use the "normal" way or lazy activating, as thet requires wpcommand to be activated
+		// we can not use the "normal" way or lazy activating, as that requires wpcommand to be activated
 		if ( strpos( $plugin, 'wpcommand' ) !== false ) {
 			activate_plugin( $plugin, '', false, true );
 			return array( 'status' => 'success' );
 		}
 
 
-		// we do a remote request to activate, as we don;t want to kill any installs
+		// we do a remote request to activate, as we don't want to kill any installs
 		$url = add_query_arg( 'wpcac_api_key', $_GET['wpcac_api_key'], get_bloginfo( 'url' ) );
 		$url = add_query_arg( 'actions', 'activate_plugin', $url );
 		$url = add_query_arg( 'plugin', $plugin, $url );

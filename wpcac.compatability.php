@@ -50,8 +50,6 @@ function wpcac_security_admin_notice() {
 
 				The plugin <strong><?php echo esc_attr( $plugin_name ); ?></strong> may cause issues with WP Command and Control.
 
-				<?php /* <a href="https://wpremote.com/faq/#<?php echo esc_attr( $plugin_name ); ?>" alt="WPRemote FAQ"> Click here for instructions on how to resolve this issue </a> */ ?>
-
 			</p>
 
 		</div>
