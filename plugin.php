@@ -3,7 +3,7 @@
 /*
 Plugin Name: WP Command and Control
 Description: Manage your WordPress site with <a href="https://wpcommandcontrol.com/">WP Command and Control</a>. <strong>Deactivate to clear your API Key.</strong>
-Version: 1.02
+Version: 1.03
 Author: SoJu Studios
 Author URI: http://supersoju.com/
 */
@@ -29,7 +29,7 @@ define( 'WPCAC_PLUGIN_SLUG', 'wpcommand' );
 define( 'WPCAC_PLUGIN_PATH', plugin_dir_path( __FILE__ ) );
 
 if ( ! defined( 'WPCAC_API_URL' ) )
-	define( 'WPCAC_API_URL', 'https://www.wpcommandcontrol.com/api/json/' );
+	define( 'WPCAC_API_URL', 'https://wpcommandcontrol.com/api/json/' );
 
 // Don't activate on anything less than PHP 5.2.4
 if ( version_compare( phpversion(), '5.2.4', '<' ) ) {

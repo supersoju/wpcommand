@@ -658,7 +658,9 @@ class WPCAC_HM_Backup {
 	}
 
 	public function mysqldump() {
-
+		
+		global $wpdb;
+		
 		$this->mysqldump_method = 'mysqldump';
 
 		$this->do_action( 'hmbkp_mysqldump_started' );
@@ -697,6 +699,9 @@ class WPCAC_HM_Backup {
 		// The database we're dumping
 		$cmd .= ' ' . escapeshellarg( DB_NAME );
 
+		// Only this site's tables
+        $cmd .= ' $(mysql -u ' . escapeshellarg( DB_USER ) . ' -p ' . escapeshellarg( DB_PASSWORD ) . ' -D ' . escapeshellarg( DB_NAME ) . ' -Bse "show tables like \'' . $wpdb->prefix . '%\'") ';
+
 		// Pipe STDERR to STDOUT
 		$cmd .= ' 2>&1';
 
@@ -717,6 +722,8 @@ class WPCAC_HM_Backup {
 	 */
 	public function mysqldump_fallback() {
 
+		 global $wpdb;
+		
 		$this->errors_to_warnings( $this->get_mysqldump_method() );
 
 		$this->mysqldump_method = 'mysqldump_fallback';
@@ -729,7 +736,7 @@ class WPCAC_HM_Backup {
 	    mysql_set_charset( DB_CHARSET, $this->db );
 
 	    // Begin new backup of MySql
-	    $tables = mysql_query( 'SHOW TABLES' );
+	    $tables = mysql_query( 'SHOW TABLES like "' . $wpdb->prefix . '%"' );
 
 	    $sql_file  = "# WordPress : " . get_bloginfo( 'url' ) . " MySQL database backup\n";
 	    $sql_file .= "#\n";
