@@ -77,6 +77,17 @@ foreach( $actions as $action => $value ) {
         $actions[$action] = _wpcac_deactivate_plugin( (string) sanitize_text_field( $_GET['plugin'] ) );
         break;
 
+    case 'install_plugin' :
+        $api_args = array(
+            'version'      => sanitize_text_field( (string) sanitize_text_field( $_GET['version'] ) ),
+        );
+        $actions[$action] = _wpcac_install_plugin( (string) sanitize_text_field( $_GET['plugin'] ), $api_args );
+        break;
+
+    case 'uninstall_plugin' :
+        $actions[$action] = _wpcac_uninstall_plugin( (string) sanitize_text_field( $_GET['plugin'] ) );
+        break;
+
     case 'get_themes' :
         $actions[$action] = _wpcac_supports_theme_upgrade() ? _wpcac_get_themes() : 'not-implemented';
         break;

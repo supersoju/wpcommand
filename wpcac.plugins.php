@@ -156,6 +156,42 @@ function _wpcac_activate_plugin( $plugin ) {
     return array( 'status' => 'success' );
 }
 
+function _wpcac_install_plugin( $plugin, $args = array() ) {
+
+	include_once ABSPATH . 'wp-admin/includes/admin.php';
+	include_once ABSPATH . 'wp-admin/includes/upgrade.php';
+	include_once ABSPATH . 'wp-includes/update.php';
+
+	// Access the plugins_api() helper function
+	include_once ABSPATH . 'wp-admin/includes/plugin-install.php';
+	$api_args = array(
+		//'slug' => $plugin,
+        'slug' => 'jetpack',
+        //'fields' => array( 'sections' => false )
+		);
+    //$api = plugins_api( 'plugin_information', array( 'slug' => 'custom-favicon' ) );
+    $api = plugins_api( 'plugin_information', $api_args );
+
+	if ( is_wp_error( $api ) )
+		return array( 'status' => 'error', 'error' => $api->get_error_code() );
+
+	$skin = new WPCAC_Plugin_Upgrader_Skin();
+	$upgrader = new Plugin_Upgrader( $skin );
+
+	// The best way to get a download link for a specific version :(
+	// Fortunately, we can depend on a relatively consistent naming pattern
+	if ( ! empty( $args['version'] ) && 'stable' != $args['version'] )
+		$api->download_link = str_replace( $api->version . '.zip', $args['version'] . '.zip', $api->download_link );
+
+	$result = $upgrader->install( $api->download_link );
+	if ( is_wp_error( $result ) )
+		return array( 'status' => 'error', 'error' => $result->get_error_code() );
+	else if ( ! $result )
+		return array( 'status' => 'error', 'error' => 'Unknown error installing plugin.' );
+
+	return array( 'status' => 'success' );
+}
+
 function _wpcac_deactivate_plugin( $plugin ) {
 
     include_once ABSPATH . 'wp-admin/includes/plugin.php';
@@ -166,6 +202,47 @@ function _wpcac_deactivate_plugin( $plugin ) {
         return array( 'status' => 'error', 'error' => $result->get_error_code() );
 
     return array( 'status' => 'success' );
+}
+
+/**
+ * Uninstall a plugin on this site.
+ */
+function _wpcac_uninstall_plugin( $plugin ) {
+	global $wp_filesystem;
+
+	include_once ABSPATH . 'wp-admin/includes/admin.php';
+	include_once ABSPATH . 'wp-admin/includes/upgrade.php';
+	include_once ABSPATH . 'wp-includes/update.php';
+
+	if ( ! _wpcac_check_filesystem_access() || ! WP_Filesystem() )
+		return array( 'status' => 'error', 'error' => 'The filesystem is not writable with the supplied credentials' );
+
+	$plugins_dir = $wp_filesystem->wp_plugins_dir();
+	if ( empty( $plugins_dir ) )
+		return array( 'status' => 'error', 'error' => 'Unable to locate WordPress Plugin directory.' );
+
+	$plugins_dir = trailingslashit( $plugins_dir );
+
+	if ( is_uninstallable_plugin( $plugin ) )
+		uninstall_plugin( $plugin );
+
+	$this_plugin_dir = trailingslashit( dirname( $plugins_dir . $plugin ) );
+	// If plugin is in its own directory, recursively delete the directory.
+	if ( strpos( $plugin, '/' ) && $this_plugin_dir != $plugins_dir ) //base check on if plugin includes directory separator AND that it's not the root plugin folder
+		$deleted = $wp_filesystem->delete( $this_plugin_dir, true );
+	else
+		$deleted = $wp_filesystem->delete( $plugins_dir . $plugin );
+
+	if ( $deleted ) {
+		if ( $current = get_site_transient('update_plugins') ) {
+			unset( $current->response[$plugin] );
+			set_site_transient('update_plugins', $current);
+		}
+		return array( 'status' => 'success' );
+	} else {
+		return array( 'status' => 'error', 'error' => 'Plugin uninstalled, but not deleted.' );
+	}
+
 }
 
 /**
