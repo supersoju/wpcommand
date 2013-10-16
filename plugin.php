@@ -58,7 +58,7 @@ if ( empty( $_GET['action'] ) || $_GET['action'] != 'do-core-upgrade' ) :
 
     require_once ( ABSPATH . 'wp-admin/includes/class-wp-upgrader.php' );
 
-    require_once WPCAC_PLUGIN_PATH . 'inc/class-wpcac-plugin-upgrader-skin.php';
+require_once WPCAC_PLUGIN_PATH . 'inc/class-wpcac-plugin-upgrader-skin.php';
 
 class WPCAC_Theme_Upgrader_Skin extends Theme_Installer_Skin {
 
