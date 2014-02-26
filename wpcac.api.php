@@ -6,14 +6,14 @@ if ( ! get_option( 'wpcac_api_key' ) ) {
     echo json_encode( 'blank-api-key' );
     exit;
 
-} elseif ( ! isset( $_GET['wpcac_api_key'] ) || urldecode( $_GET['wpcac_api_key'] ) !== get_option( 'wpcac_api_key' ) || ! isset( $_GET['actions'] ) ) {
+} elseif ( ! isset( $_POST['wpcac_api_key'] ) || urldecode( $_POST['wpcac_api_key'] ) !== get_option( 'wpcac_api_key' ) || ! isset( $_POST['actions'] ) ) {
 
     echo json_encode( 'bad-api-key' );
     exit;
 
 }
 
-$actions = explode( ',', sanitize_text_field( $_GET['actions'] ) );
+$actions = explode( ',', sanitize_text_field( $_POST['actions'] ) );
 $actions = array_flip( $actions );
 
 // Disable error_reporting so they don't break the json request
@@ -35,13 +35,14 @@ foreach( $actions as $action => $value ) {
 
         // TODO should be dynamic
     case 'get_plugin_version' :
-        $actions[$action] = '1.11';
+        $actions[$action] = '1.2';
         break;
 
+    /*
     case 'get_filesystem_method' :
         $actions[$action] = get_filesystem_method();
         break;
-
+    */
     case 'get_supported_filesystem_methods' :
         $actions[$action] = array();
         if ( extension_loaded( 'ftp' ) || extension_loaded( 'sockets' ) || function_exists( 'fsockopen' ) )
@@ -66,26 +67,26 @@ foreach( $actions as $action => $value ) {
         break;
 
     case 'upgrade_plugin' :
-        $actions[$action] = _wpcac_upgrade_plugin( (string) sanitize_text_field( $_GET['plugin'] ) );
+        $actions[$action] = _wpcac_upgrade_plugin( (string) sanitize_text_field( $_POST['plugin'] ) );
         break;
 
     case 'activate_plugin' :
-        $actions[$action] = _wpcac_activate_plugin( (string) sanitize_text_field( $_GET['plugin'] ) );
+        $actions[$action] = _wpcac_activate_plugin( (string) sanitize_text_field( $_POST['plugin'] ) );
         break;
 
     case 'deactivate_plugin' :
-        $actions[$action] = _wpcac_deactivate_plugin( (string) sanitize_text_field( $_GET['plugin'] ) );
+        $actions[$action] = _wpcac_deactivate_plugin( (string) sanitize_text_field( $_POST['plugin'] ) );
         break;
 
     case 'install_plugin' :
         $api_args = array(
-            'version'      => sanitize_text_field( (string) sanitize_text_field( $_GET['version'] ) ),
+            'version'      => sanitize_text_field( (string) sanitize_text_field( $_POST['version'] ) ),
         );
-        $actions[$action] = _wpcac_install_plugin( (string) sanitize_text_field( $_GET['plugin'] ), $api_args );
+        $actions[$action] = _wpcac_install_plugin( (string) sanitize_text_field( $_POST['plugin'] ), $api_args );
         break;
 
     case 'uninstall_plugin' :
-        $actions[$action] = _wpcac_uninstall_plugin( (string) sanitize_text_field( $_GET['plugin'] ) );
+        $actions[$action] = _wpcac_uninstall_plugin( (string) sanitize_text_field( $_POST['plugin'] ) );
         break;
 
     case 'get_themes' :
@@ -93,7 +94,7 @@ foreach( $actions as $action => $value ) {
         break;
 
     case 'upgrade_theme' :
-        $actions[$action] = _wpcac_upgrade_theme( (string) sanitize_text_field( $_GET['theme'] ) );
+        $actions[$action] = _wpcac_upgrade_theme( (string) sanitize_text_field( $_POST['theme'] ) );
         break;
 
     case 'get_files' :
@@ -101,7 +102,7 @@ foreach( $actions as $action => $value ) {
         break;
 
     case 'get_php_file' :
-        $actions[$action] = _wpcac_get_php_file(sanitize_text_field( $_GET['file'] ) );
+        $actions[$action] = _wpcac_get_php_file(sanitize_text_field( $_POST['file'] ) );
         break;
 
     case 'do_backup' :
@@ -126,7 +127,7 @@ foreach( $actions as $action => $value ) {
 
     case 'get_option_value' :
         $actions[$action] = array(
-            sanitize_text_field( $_GET['option_name']) => get_option((string) sanitize_text_field( $_GET['option_name'] ))
+            sanitize_text_field( $_POST['option_name']) => get_option((string) sanitize_text_field( $_POST['option_name'] ))
         );
         break;
 
