@@ -11,7 +11,31 @@ if ( ! get_option( 'wpcac_api_key' ) ) {
     echo json_encode( 'bad-api-key' );
     exit;
 
-}
+} else {
+    if(isset($_POST['wpcac_verify'])){
+
+        $verify = $_POST['wpcac_verify'];
+        unset( $_POST['wpcac_verify'] );
+
+        $hash = _WPCAC_generate_hashes( $_POST );
+
+        if ( ! in_array( $verify, $hash, true ) ) {
+            echo json_encode( 'bad-verify-key' );
+            exit;
+        }
+
+        /*
+        if ( (int) $_POST['timestamp'] > time() + 360 || (int) $_POST['timestamp'] < time() - 360 ) {
+            echo json_encode( 'bad-timstamp' );
+            exit;
+        }
+        */
+
+    } else {
+        echo json_encode( 'bad-hash' );
+        exit;
+    };
+};
 
 $actions = explode( ',', sanitize_text_field( $_POST['actions'] ) );
 $actions = array_flip( $actions );
@@ -35,7 +59,7 @@ foreach( $actions as $action => $value ) {
 
         // TODO should be dynamic
     case 'get_plugin_version' :
-        $actions[$action] = '1.2';
+        $actions[$action] = '1.25';
         break;
 
     /*

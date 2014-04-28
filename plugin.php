@@ -3,12 +3,12 @@
 /*
 Plugin Name: WP Command and Control
 Description: Manage your WordPress site with <a href="https://wpcommandcontrol.com/">WP Command and Control</a>. <strong>Deactivate to clear your API Key.</strong>
-Version: 1.2
+Version: 1.25
 Author: SoJu Studios
 Author URI: http://supersoju.com/
  */
 
-/*  Copyright 2013 Soju LLC  (email : support@supersoju.com)
+/*  Copyright 2014 Soju LLC  (email : support@supersoju.com)
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -54,7 +54,7 @@ if ( version_compare( get_bloginfo( 'version' ), '3.1', '>=' ) ) {
 }
 
 // Don't include when doing a core update
-if ( empty( $_GET['action'] ) || $_GET['action'] != 'do-core-upgrade' ) :
+if ( empty( $_POST['action'] ) || $_POST['action'] != 'do-core-upgrade' ) :
 
     require_once ( ABSPATH . 'wp-admin/includes/class-wp-upgrader.php' );
 
@@ -217,6 +217,17 @@ function _WPCAC_upgrade_core()  {
     wp_upgrade();
 
     return true;
+}
+
+function _WPCAC_generate_hashes($vars) {
+    $api_key = get_option( 'wpcac_api_key' );
+    if ( ! $api_key ){
+        return array();
+    };
+
+    $hashes = array();
+    $hashes[] = hash_hmac( 'sha256', serialize( $vars ), $api_key );
+    return $hashes;
 }
 
 function _WPCAC_check_filesystem_access() {
