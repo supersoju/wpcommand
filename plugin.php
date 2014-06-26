@@ -3,7 +3,7 @@
 /*
 Plugin Name: WP Command and Control
 Description: Manage your WordPress site with <a href="https://wpcommandcontrol.com/">WP Command and Control</a>. <strong>Deactivate to clear your API Key.</strong>
-Version: 1.26
+Version: 2.0
 Author: SoJu Studios
 Author URI: http://supersoju.com/
  */
@@ -166,7 +166,7 @@ class WPCAC_CreatePageGroup extends AdminPageFramework {
             </div>
             <div id="wpcac-sucuri" class="col-md-4">
                 <div class="well">
-                    <h3><a href="http://affl.sucuri.net/?affl=0136781c72d47134b720916e857c02aa&trid=<?php echo $blog_uuid; ?>&cloudproxy" target="_blank">Preventive Website Security in the cloud from Sucuri!</a></h3>
+                    <h3><a href="http://wpcommandcontrol.com/client/sucuri" target="_blank">Preventive Website Security in the cloud from Sucuri!</a></h3>
                     <ul>
                         <li>Web Application Firewall (WAF) Protection</li>
                         <li>Virtual Website Patching</li>
@@ -174,7 +174,7 @@ class WPCAC_CreatePageGroup extends AdminPageFramework {
                         <li>High Security Website Monitoring</li>
                     <li>Malicious Traffic Filtering</li>
                     </ul>
-                    <p><a href="http://affl.sucuri.net/?affl=0136781c72d47134b720916e857c02aa&trid=<?php echo $blog_uuid; ?>&cloudproxy" class="btn btn-primary" target="_blank">Sign up now</a> <a href="http://affl.sucuri.net/?affl=0136781c72d47134b720916e857c02aa&trid=<?php echo $blog_uuid; ?>&cloudproxy" class="btn btn-primary" target="_blank">Read more</a></p>
+                    <p><a href="http://wpcommandcontrol.com/client/sucuri" class="btn btn-primary" target="_blank">Sign up now</a> <a href="http://wpcommandcontrol.com/client/sucuri" class="btn btn-primary" target="_blank">Read more</a></p>
                     <iframe width="100%" height="315" src="//www.youtube-nocookie.com/embed/QV3OfHmEq5c" frameborder="0" allowfullscreen></iframe>
 
                 </div>
@@ -268,6 +268,7 @@ class WPCAC_CreatePageGroup extends AdminPageFramework {
         </script>
         <?php
     }
+
     public function do_wpcac_api_keys() {
         $api_key = get_option( 'wpcac_api_key' );
         $remoteapikey = get_option( 'wpcac_serviceapi_key' );
