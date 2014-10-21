@@ -125,6 +125,10 @@ foreach( $actions as $action => $value ) {
         $actions[$action] = _wpcac_get_files();
         break;
 
+    case 'flush_rewrite' :
+        $actions[$action] = flush_rewrite_rules();
+        break;
+    
     case 'get_php_file' :
         $actions[$action] = _wpcac_get_php_file(sanitize_text_field( $_POST['file'] ) );
         break;
