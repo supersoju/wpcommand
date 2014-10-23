@@ -126,7 +126,7 @@ foreach( $actions as $action => $value ) {
         break;
 
     case 'flush_rewrite' :
-        $actions[$action] = flush_rewrite_rules();
+        $actions[$action] = _wpcac_flush_rewrite_rules();
         break;
     
     case 'get_php_file' :

@@ -341,6 +341,20 @@ function WPCAC_plugin_update_check() {
 add_action( 'admin_init', 'WPCAC_plugin_update_check' );
 
 /**
+ * Flush rewrite rules
+ *
+ * @access public
+ * @return void
+ */
+function _wpcac_flush_rewrite_rules() {
+
+    global $wp_rewrite;
+    return $wp_rewrite->flush_rules(true);
+    return "success";
+}
+
+
+/**
  * Run any update code and update the current version in the db
  *
  * @access public
