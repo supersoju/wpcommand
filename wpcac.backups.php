@@ -511,56 +511,57 @@ endswitch;
  *
  * @param string $call
  * @return mixed
-         */
-        function _wpcac_backups_api_call( $action ) {
+**/
+        
+function _wpcac_backups_api_call( $action ) {
 
-            switch( $action ) {
+    switch( $action ) {
 
-            case 'supports_backups' :
-                return true;
+    case 'supports_backups' :
+        return true;
 
-            case 'do_backup' :
-                return WPCAC_Backups::get_instance()->do_backup();
+    case 'do_backup' :
+        return WPCAC_Backups::get_instance()->do_backup();
 
-            case 'do_sql_backup' :
-                return WPCAC_Backups::get_instance()->do_sql_backup();
+    case 'do_sql_backup' :
+        return WPCAC_Backups::get_instance()->do_sql_backup();
 
-            case 'get_backup' :
-                return WPCAC_Backups::get_instance()->get_backup();
+    case 'get_backup' :
+        return WPCAC_Backups::get_instance()->get_backup();
 
-            case 'delete_backup' :
-                return WPCAC_Backups::get_instance()->cleanup();
+    case 'delete_backup' :
+        return WPCAC_Backups::get_instance()->cleanup();
 
-            }
+    }
 
-        }
+}
 
-        /**
-         * Return an array of back meta information
-         *
-         * @return array
-         */
-        function _wpcac_get_backups_info() {
+/**
+    * Return an array of back meta information
+    *
+    * @return array
+    */
+function _wpcac_get_backups_info() {
 
-            $hm_backup = new WPCAC_HM_Backup();
+    $hm_backup = new WPCAC_HM_Backup();
 
-            return array(
-                'mysqldump_path' 	=> $hm_backup->get_mysqldump_command_path(),
-                'zip_path' 			=> $hm_backup->get_zip_command_path(),
-                'estimated_size'	=> WPCAC_Backups::get_instance()->get_estimate_size()
-            );
+    return array(
+        'mysqldump_path' 	=> $hm_backup->get_mysqldump_command_path(),
+        'zip_path' 			=> $hm_backup->get_zip_command_path(),
+        'estimated_size'	=> WPCAC_Backups::get_instance()->get_estimate_size()
+    );
 
-        }
+}
 
-        /**
-         * Calculate the filesize of the site
-         *
-         * The calculated size is stored in a transient
-         */
-        function wpcac_ajax_calculate_backup_size() {
+/**
+    * Calculate the filesize of the site
+    *
+    * The calculated size is stored in a transient
+    */
+function wpcac_ajax_calculate_backup_size() {
 
-            WPCAC_Backups::get_instance()->get_filesize();
+    WPCAC_Backups::get_instance()->get_filesize();
 
-            exit;
-        }
-        add_action( 'wp_ajax_nopriv_wpcac_calculate_backup_size', 'wpcac_ajax_calculate_backup_size' );
+    exit;
+}
+add_action( 'wp_ajax_nopriv_wpcac_calculate_backup_size', 'wpcac_ajax_calculate_backup_size' );
