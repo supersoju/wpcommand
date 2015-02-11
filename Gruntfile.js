@@ -95,7 +95,6 @@ module.exports = function (grunt) {
 					from: /Stable tag: (.*)/,
 					to: "Stable tag: <%= pkg.version %>"
 				}]
-
 			},
 			plugin_php: {
 				src: [ 'plugin.php' ],
