@@ -31,6 +31,7 @@ $RECYCLE.BIN/
 .metadata
 build/
 tmp/
+release/
 tests/clover.xml
 
 # Grunt
