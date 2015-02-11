@@ -68,7 +68,14 @@ module.exports = function (grunt) {
             }
         },
         gitpush: {
-            push: {
+            github: {
+                options: {
+                    tags: true,
+                    remote: 'github',
+                    branch: 'master'
+                }
+            },
+            bitbucket: {
                 options: {
                     tags: true,
                     remote: 'origin',
