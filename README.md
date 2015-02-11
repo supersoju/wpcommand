@@ -51,3 +51,5 @@ You can email us at support@wpcommandcontrol.com for support.
 #### 1.0
 
 * Initial version
+
+~Current Version: 2.1.0~

@@ -1,0 +1,31 @@
+{
+  "name": "WPCommand",
+  "version": "2.1.0",
+  "description": "=== WP Command and Control Plugin ===",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@bitbucket.org/supersoju/wp-command-wp-plugin.git"
+  },
+  "author": "Andrew Jones",
+  "license": "GPL",
+  "bugs": {
+    "url": "https://github.com/pods-framework/pods/issues"
+  },
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-cli": "~0.1.11",
+    "grunt-composer": "^0.4.4",
+    "grunt-contrib-clean": "^0.6.0",
+    "grunt-contrib-copy": "^0.7.0",
+    "grunt-git": "^0.3.3",
+    "grunt-glotpress": "^0.1.1",
+    "grunt-push-svn": "^0.2.1",
+    "grunt-remove": "^0.1.0",
+    "grunt-svn-checkout": "^0.1.1",
+    "grunt-text-replace": "^0.4.0"
+  }
+}

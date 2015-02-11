@@ -1,5 +1,7 @@
 <?php
 
+$plugin_version = '2.1.0';
+
 // Check the API Key
 if ( ! get_option( 'wpcac_api_key' ) ) {
 
@@ -57,9 +59,8 @@ foreach( $actions as $action => $value ) {
     // TODO should namespace api methods?
     switch( $action ) {
 
-        // TODO should be dynamic
     case 'get_plugin_version' :
-        $actions[$action] = '2.03';
+        $actions[$action] = $plugin_version;
         break;
 
     /*
