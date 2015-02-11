@@ -30,8 +30,10 @@ $RECYCLE.BIN/
 .project
 .metadata
 build/
+build/*
 tmp/
 release/
+release/*
 tests/clover.xml
 
 # Grunt
