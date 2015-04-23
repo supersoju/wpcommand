@@ -129,7 +129,7 @@ foreach( $actions as $action => $value ) {
     case 'flush_rewrite' :
         $actions[$action] = _wpcac_flush_rewrite_rules();
         break;
-    
+
     case 'get_php_file' :
         $actions[$action] = _wpcac_get_php_file(sanitize_text_field( $_POST['file'] ) );
         break;
@@ -157,6 +157,13 @@ foreach( $actions as $action => $value ) {
     case 'get_option_value' :
         $actions[$action] = array(
             sanitize_text_field( $_POST['option_name']) => get_option((string) sanitize_text_field( $_POST['option_name'] ))
+        );
+        break;
+
+    case 'set_option_value' :
+        $actions[$action] = _wpcac_set_option(
+            sanitize_text_field($_POST['option_name']),
+            sanitize_text_field($_POST['option_value'])
         );
         break;
 

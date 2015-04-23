@@ -353,6 +353,18 @@ function _wpcac_flush_rewrite_rules() {
     return "success";
 }
 
+/**
+ * Set WP Option Value
+ *
+ * @access public
+ * @return void
+ */
+function _wpcac_set_option( $option_name, $option_value ) {
+
+    update_option( $option_name, $option_value );
+    return "success";
+}
+
 
 /**
  * Run any update code and update the current version in the db

@@ -136,7 +136,7 @@ class WPCAC_Backups extends WPCAC_HM_Backup {
             // Append the secret key on apache servers
             if ( $is_apache && $this->key() ) {
 
-                $backup = add_query_arg( 'key', $this->key(), $backup );
+                $backup = esc_url(add_query_arg( 'key', $this->key(), $backup ));
 
                 // Force the .htaccess to be rebuilt
                 if ( file_exists( $this->get_path() . '/.htaccess' ) )
@@ -210,7 +210,7 @@ class WPCAC_Backups extends WPCAC_HM_Backup {
 
             // we dont know the size yet, fire off a remote request to get it for later
             // it can take some time so we have a small timeout then return "Calculating"
-            wp_remote_get( add_query_arg( array( 'action' => 'wpcac_calculate_backup_size', 'backup_excludes' => $this->get_excludes() ), admin_url( 'admin-ajax.php' ) ), array( 'timeout' => 0.1, 'sslverify' => false ) );
+            wp_remote_get( esc_url(add_query_arg( array( 'action' => 'wpcac_calculate_backup_size', 'backup_excludes' => $this->get_excludes() ), admin_url( 'admin-ajax.php' ) ), array( 'timeout' => 0.1, 'sslverify' => false ) ) );
 
             return 'Calculating';
 
@@ -349,7 +349,9 @@ endswitch;
                 $contents[] = '</IfModule>';
                 $contents[] = '';
 
-                insert_with_markers( $htaccess, 'WP Command Backup', $contents );
+                if(!get_option( 'wpcac_no_htaccess' ) == "1"){
+                    insert_with_markers( $htaccess, 'WP Command Backup', $contents );
+                };
 
             }
 
