@@ -1,6 +1,7 @@
 {
   "name": "WPCommand",
-  "version": "2.1.0",
+  "version": "2.2.0",
+  "tested_version": "4.2.1",
   "description": "=== WP Command and Control Plugin ===",
   "main": "index.js",
   "scripts": {
