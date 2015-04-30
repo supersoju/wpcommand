@@ -91,6 +91,9 @@ module.exports = function (grunt) {
                     from: /~Current Version:\s*(.*)~/,
                     to: "~Current Version: <%= pkg.version %>~"
                 }, {
+                    from: /Tested up to: (.*)/,
+                    to: "Tested up to: <%= pkg.tested_version %>"
+                }, {
                     from: /Stable tag: (.*)/,
                     to: "Stable tag: <%= pkg.version %>"
                 }]
@@ -101,6 +104,9 @@ module.exports = function (grunt) {
                 replacements: [{
                     from: /Stable tag: (.*)/,
                     to: "Stable tag: <%= pkg.version %>"
+                }, {
+                    from: /Tested up to: (.*)/,
+                    to: "Tested up to: <%= pkg.tested_version %>"
                 }]
             },
             plugin_php: {

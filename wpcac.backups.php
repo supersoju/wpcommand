@@ -349,7 +349,9 @@ endswitch;
                 $contents[] = '</IfModule>';
                 $contents[] = '';
 
-                if(!get_option( 'wpcac_no_htaccess' ) == "1"){
+                if(get_option( 'wpcac_no_htaccess' ) && get_option( 'wpcac_no_htaccess' ) == "1"){
+                    //Not writing
+                } else {
                     insert_with_markers( $htaccess, 'WP Command Backup', $contents );
                 };
 
