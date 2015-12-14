@@ -3,7 +3,7 @@
 /*
 Plugin Name: WP Command and Control
 Description: Manage your WordPress site with <a href="https://wpcommandcontrol.com/">WP Command and Control</a>. <strong>Deactivate to clear your API Key.</strong>
-Version: 2.2.0
+Version: 2.3.0
 Author: SoJu Studios
 Author URI: http://supersoju.com/
  */
@@ -134,7 +134,6 @@ class WPCAC_CreatePageGroup extends AdminPageFramework {
                 'title' => 'API Keys',        // page title
                 'page_slug' => 'wpcac_api_keys',    // page slug
             )
-            
         );
     }
     // Notice that the name of the method is 'do_' + the page slug.
@@ -239,7 +238,7 @@ class WPCAC_CreatePageGroup extends AdminPageFramework {
                             jQuery('#wpcac-pingtime .longest i').addClass('glyphicon-remove text-danger');
                         };
                     };
-    
+
                     var malwaretext = "";
                     malwaretext = malwaretext + "<p>Last scan: " + data.scandate + "</p>";
                     if(data.rawscan.MALWARE && data.rawscan.MALWARE.WARN){
@@ -298,7 +297,7 @@ class WPCAC_CreatePageGroup extends AdminPageFramework {
         <?php
         };
     }
-    
+
 }
 
 // Instantiate the class object.
