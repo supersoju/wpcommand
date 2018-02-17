@@ -180,7 +180,7 @@ class WPCAC_Backups extends WPCAC_HM_Backup {
 
             rmdir( $this->get_path() );
 
-            delete_option( 'wpcac_backup_path' );
+            //delete_option( 'wpcac_backup_path' );
 
         }
 
