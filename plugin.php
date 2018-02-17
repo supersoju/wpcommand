@@ -3,7 +3,7 @@
 /*
 Plugin Name: WP Command and Control
 Description: Manage your WordPress site with <a href="https://wpcommandcontrol.com/">WP Command and Control</a>. <strong>Deactivate to clear your API Key.</strong>
-Version: 2.3.1
+Version: 2.3.2
 Author: SoJu Studios
 Author URI: http://supersoju.com/
  */
