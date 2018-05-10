@@ -1,7 +1,7 @@
 {
   "name": "WPCommand",
-  "version": "2.3.2",
-  "tested_version": "4.9.4",
+  "version": "2.3.3",
+  "tested_version": "4.9.5",
   "description": "=== WP Command and Control Plugin ===",
   "main": "index.js",
   "scripts": {
@@ -14,7 +14,7 @@
   "author": "Andrew Jones",
   "license": "GPL",
   "bugs": {
-    "url": "https://github.com/pods-framework/pods/issues"
+    "url": "https://github.com/supersoju/wp-command-wp-plugin/issues"
   },
   "devDependencies": {
     "grunt": "^0.4.5",

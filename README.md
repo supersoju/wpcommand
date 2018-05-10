@@ -2,8 +2,8 @@
 Contributors: supersoju
 Tags: wpcommand, wpcontrol, remote administration, multiple wordpress
 Requires at least: 3.1
-Tested up to: 4.9.4
-Stable tag: 2.3.2
+Tested up to: 4.9.5
+Stable tag: 2.3.3
 
 WP Command and Control allows you to manage multiple WordPress installs from a single dashboard.
 
@@ -52,4 +52,4 @@ You can email us at support@wpcommandcontrol.com for support.
 
 * Initial version
 
-~Current Version: 2.3.2~
+~Current Version: 2.3.3~
