@@ -9,7 +9,7 @@ class WPRP_Theme_Upgrader_Skin extends Theme_Installer_Skin {
         $this->error = $error;
     }
 
-    function feedback( $feedback ) {
+    function feedback( $feedback, ...$args ) {
         $this->feedback = $feedback;
     }
 

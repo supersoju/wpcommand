@@ -3,7 +3,7 @@
 /*
 Plugin Name: WP Command and Control
 Description: Manage your WordPress site with <a href="https://wpcommandcontrol.com/">WP Command and Control</a>. <strong>Deactivate to clear your API Key.</strong>
-Version: 2.3.3
+Version: 2.3.4
 Author: SoJu Studios
 Author URI: http://supersoju.com/
  */
@@ -69,7 +69,7 @@ class WPCAC_Theme_Upgrader_Skin extends Theme_Installer_Skin {
         $this->error = $error;
     }
 
-    function feedback( $feedback ) {
+    function feedback( $feedback, ...$args ) {
         $this->feedback = $feedback;
     }
 
@@ -92,7 +92,7 @@ class WPCAC_Core_Upgrader_Skin extends WP_Upgrader_Skin {
         $this->error = $error;
     }
 
-    function feedback( $feedback ) {
+    function feedback( $feedback, ...$args ) {
         $this->feedback = $feedback;
     }
 
