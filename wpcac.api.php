@@ -1,6 +1,6 @@
 <?php
 
-$plugin_version = '2.3.3';
+$plugin_version = '2.3.4';
 
 // Check the API Key
 if ( ! get_option( 'wpcac_api_key' ) ) {
