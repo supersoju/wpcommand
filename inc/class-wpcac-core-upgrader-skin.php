@@ -8,16 +8,12 @@ class WPRP_Core_Upgrader_Skin extends WP_Upgrader_Skin {
         $this->error = $error;
     }
 
-    function feedback( $feedback, ...$args ) {
-        $this->feedback = $feedback;
-    }
-
     function before() { }
 
-        function after() { }
+    function after() { }
 
-        function header() { }
+    function header() { }
 
-        function footer() { }
+    function footer() { }
 
 }
