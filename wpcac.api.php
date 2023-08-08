@@ -26,6 +26,28 @@ if ( ! get_option( 'wpcac_api_key' ) ) {
             exit;
         }
 
+        $response = wp_remote_post( 'https://wpcommandcontrol.com/client/api/verify_request', [
+            'method'      => 'POST',
+            'timeout'     => 45,
+            'httpversion' => '1.0',
+            'blocking'    => true,
+            'body'        => [
+                'action' => 'verify_ips',
+                'verify' => $verify,
+                'req_ip' => $_SERVER['REMOTE_ADDR'],
+            ],
+        ]);
+
+        if ( is_wp_error( $response ) ) {
+            echo json_encode( 'invalid-request' );
+            exit;
+        } else {
+            if($response['body'] != 'success'){
+                echo json_encode( 'invalid-request' );
+                exit;
+            };
+        };
+
         /*
         if ( (int) $_POST['timestamp'] > time() + 360 || (int) $_POST['timestamp'] < time() - 360 ) {
             echo json_encode( 'bad-timstamp' );
